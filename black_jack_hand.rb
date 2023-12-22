@@ -18,8 +18,12 @@ class Hand
         total_score = 0
         @cards.each do |card|
             total_score += card.points
+            if card.points == 11 && total_score > 21
+                total_score -= 10
+            else
+                total_score
+            end
         end
-
         total_score
     end
 end
