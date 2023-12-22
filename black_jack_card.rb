@@ -2,8 +2,8 @@
 class Card
     attr_reader :value, :suit
 
-    MARK = ["ハート", "ダイヤ", "スペード", "クラブ"]
-    NUMBER = ["A", 2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K"]
+    MARK = ["ハート", "ダイヤ", "スペード", "クラブ"].freeze
+    NUMBER = ["A", 2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K"].freeze
 
     def initialize(mark, number)
         @mark = mark
@@ -17,12 +17,11 @@ class Card
     def points
         case @number
         when "A"
-            1
+            11
         when "K", "Q", "J"
             10
         else
             @number.to_i
         end
     end
-
 end

@@ -1,6 +1,7 @@
 require_relative 'black_jack_deck'
 require_relative 'black_jack_card'
 
+# 手札を作るクラス
 class Hand
     attr_accessor :cards
 
@@ -18,6 +19,7 @@ class Hand
         @cards.each do |card|
             total_score += card.points
         end
+
         total_score
     end
 end
