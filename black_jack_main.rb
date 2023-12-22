@@ -1,3 +1,7 @@
-require './black_jack_trump'
+# 全体を実行するクラス
+require_relative "black_jack_game"
+require_relative "black_jack_card"
 
-test = Trump.new
+
+game = Game.new
+game.start

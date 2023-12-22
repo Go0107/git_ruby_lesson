@@ -1,21 +1,13 @@
-class User
-    def initialize(name)
-        @name = name
-    end
+ary = ["東京", "大阪", "名古屋", "福岡", "札幌"]
 
-    def self.create_users(names)
-        names.map do |name|
-            User.new(name)
-        end
-    end
+newary = ary[1, 2]
 
-    def hello
-        "Hello, I am #{@name}"
-    end
+puts("元の配列:")
+ary.each do |youso|
+  puts(youso)
 end
 
-names = ['Alice', 'Bob', 'Carol']
-users = User.create_users(names)
-users.each do |user|
-    puts user.hello
+puts("新しい配列:")
+newary.each do |youso|
+  puts(youso)
 end
