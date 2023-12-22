@@ -8,6 +8,8 @@ class Game
         @deck = Deck.new
         @player = Player.new
         @dealer = Dealer.new
+        @cpu1 = Cpu1.new
+        @cpu2 = Cpu2.new
     end
 
     def deal
@@ -16,12 +18,18 @@ class Game
         @player.hand.add_card(@deck.draw)
         @dealer.hand.add_card(@deck.draw)
         @dealer.hand.add_card(@deck.draw)
+        @cpu1.hand.add_card(@deck.draw)
+        @cpu1.hand.add_card(@deck.draw)
+        @cpu2.hand.add_card(@deck.draw)
+        @cpu2.hand.add_card(@deck.draw)
     end
 
     def screen_deal
         # デッキに追加したカードを表示する処理
         puts "あなたの引いたカードは#{@player.hand.cards.first}です。"
         puts "あなたの引いたカードは#{@player.hand.cards[1]}です。"
+        puts "cpu1の引いたカードは#{@cpu1.hand.cards.first}です。"
+        puts "cpu1の引いたカードは#{@cpu1.hand.cards[1]}です。"
         puts "ディーラーの引いたカードは#{@dealer.hand.cards.first}です。"
         puts "ディーラーの引いた2枚目のカードはわかりません。"
     end
@@ -38,6 +46,15 @@ class Game
             else
                 puts "YもしくはNを入力してください。"
             end
+        end
+    end
+
+    def cpu1_time
+        # cpu1はディーラーと同じ性能（仮）
+        while @cpu1.hand.score < 18
+            puts "cpu1がカードを引きました"
+            @cpu1.hand.add_card(@deck.draw)
+            puts "cpu1の引いたカードは#{@cpu1.hand.cards.last}です"
         end
     end
 
@@ -69,6 +86,25 @@ class Game
         end
     end
 
+    def cpu1_judge
+        if @cpu1.hand.score > 21 && @dealer.hand.score > 21
+            puts "両者バーストしました。"
+            puts "引き分けです。"
+        elsif @cpu1.hand.score > 21
+            puts "cpu1はバーストしました。"
+            puts "ディーラーの勝ちです。"
+        elsif @dealer.hand.score > 21
+            puts "ディーラーはバーストしました。"
+            puts "cpu1の勝ちです！"
+        elsif @cpu1.hand.score > @dealer.hand.score
+            puts "cpu1の勝ちです！"
+        elsif @cpu1.hand.score < @dealer.hand.score
+            puts "ディーラーの勝ちです。"
+        else
+            puts "引き分けです！"
+        end
+    end
+
     def start
         puts "ブラックジャックを開始します。"
         # ユーザーにカードを2枚配布
@@ -77,6 +113,8 @@ class Game
         screen_deal
         # 自分の得点の表示、もう一度引くかの選択、ループ処理
         player_time
+        # cpu1のターン
+        cpu1_time
         # ディーラーの二枚目の表示
         # ディーラーの得点の表示
         # でぃーらーが17を超えるまで引く
@@ -86,6 +124,9 @@ class Game
         puts "ディーラーの得点は#{@dealer.hand.score}です。"
         # 勝者の表示
         judge
+        # cpuの得点、勝敗
+        puts "cpu1の得点は#{@cpu1.hand.score}です。"
+        cpu1_judge
         puts "ブラックジャックを終了します。"
     end
 end
