@@ -2,9 +2,8 @@ require_relative 'black_jack_card'
 require_relative 'black_jack_deck'
 require_relative 'black_jack_hand'
 require_relative 'black_jack_human'
-
+# ゲーム実行を管理するクラス
 class Game
-
     def initialize
         @deck = Deck.new
         @player = Player.new
@@ -31,10 +30,10 @@ class Game
         while @player.hand.score < 22
             puts "あなたの現在の得点は#{@player.hand.score}です。カードを引きますか？ (Y/N)"
             choice = gets.chomp
-            if choice == "Y" || choice == "y"
+            if ["Y", "y"].include?(choice)
                 @player.hand.add_card(@deck.draw)
                 puts "あなたの引いたカードは#{@player.hand.cards.last}です。"
-            elsif choice == "N" || choice == "n"
+            elsif ["N", "n"].include?(choice)
                 break
             else
                 puts "YもしくはNを入力してください。"
@@ -69,7 +68,7 @@ class Game
             puts "引き分けです！"
         end
     end
-    
+
     def start
         puts "ブラックジャックを開始します。"
         # ユーザーにカードを2枚配布
