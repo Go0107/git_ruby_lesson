@@ -20,8 +20,6 @@ class Game
         @dealer.hand.add_card(@deck.draw)
         @cpu1.hand.add_card(@deck.draw)
         @cpu1.hand.add_card(@deck.draw)
-        @cpu2.hand.add_card(@deck.draw)
-        @cpu2.hand.add_card(@deck.draw)
     end
 
     def screen_deal
