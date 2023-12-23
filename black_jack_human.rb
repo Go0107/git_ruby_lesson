@@ -14,3 +14,9 @@ end
 
 class Dealer < Human
 end
+
+class Cpu1 < Human
+end
+
+class Cpu2 < Human
+end
